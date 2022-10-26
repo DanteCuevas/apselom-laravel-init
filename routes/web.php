@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,9 @@ Route::get('/', function () {
 
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
+
+
+//Route::get('/products', [ProductController::class, 'index']);
+//Route::post('/products', [ProductController::class, 'store']);
+//....  it is the same to down
+Route::resource('products', ProductController::class);
