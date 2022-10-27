@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -34,9 +36,23 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        //
+        //dd($request->all());
+        //Product::create($request->all());
+        /*
+        its ok but could be better
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required',
+        ]);
+        */
+
+        Product::create($request->all());
+        
+        return redirect()->route('products.index')
+            ->with('success','Product created successfully.');
+
     }
 
     /**
@@ -45,10 +61,21 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
+    /* public function show($product)
+    {
+        $product = Product::find($product);
+
+        if(empty($product)) {
+            return redirect()->route('products.index')
+            ->with('success','Product not found.');
+        }
+
+        return view('products.show', compact('product'));
+    } */
 
     /**
      * Show the form for editing the specified resource.
@@ -56,9 +83,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -68,9 +95,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        //dd($request->all(), $product);
+        /* $product->name = 'asddStatic';
+        $product->save(); */
+        $product->update($request->all());
+        return redirect()->route('products.index')
+            ->with('success','Product updated successfully.');
     }
 
     /**
@@ -79,8 +111,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index')
+            ->with('success','Product deleted successfully.');
     }
 }

@@ -24,6 +24,7 @@ Route::post('/users', [UserController::class, 'store']);
 
 
 //Route::get('/products', [ProductController::class, 'index']);
-//Route::post('/products', [ProductController::class, 'store']);
+//Route::post('/products', [ProductController::class, 'store'])->name('products.create');
+//Route::get('/products/{product}', [ProductController::class, 'store'])->name('products.show');
 //....  it is the same to down
 Route::resource('products', ProductController::class);
