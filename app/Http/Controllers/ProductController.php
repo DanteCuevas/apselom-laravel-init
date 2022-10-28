@@ -16,6 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        //dd(session()->flash('message', 'test1'),session('message') );
         $products = Product::orderBy('id', 'desc')->paginate(10);
         return view('products.index', compact('products'));
     }

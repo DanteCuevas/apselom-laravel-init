@@ -46,6 +46,8 @@
     @endforeach
 </table>
 
+{!! $products->links() !!}
+
 <?php //LA MEJOR FORMA CON BLADE ?>
 <table border="1">
 
