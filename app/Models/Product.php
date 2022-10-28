@@ -15,7 +15,20 @@ class Product extends Model
         'name',
         'description',
         'stock',
-        'status'
+        'status',
+        'code'
     ];
+
+    public function getStatusChangeAttribute () {
+        return $this->status ? 'Disponible' : 'No Disponible';
+    }
+
+    public function getStockChangeAttribute () {
+        return number_format($this->stock, 2);
+    }
+
+    public function setCodeAttribute ($value) {
+        $this->attributes['code'] = str_pad($value, 6, "0", STR_PAD_LEFT);
+    }
 
 }

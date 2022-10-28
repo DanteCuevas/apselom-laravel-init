@@ -21,17 +21,25 @@
 <table class="table table-bordered">
     <tr>
         <th>Id</th>
+        <th>Code</th>
         <th>Name</th>
         <th>Description</th>
         <th>Stock</th>
+        <th>Stock Accessor</th>
+        <th>Status</th>
+        <th>Status Accessor</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($products as $product)
     <tr>
         <td>{{ $product->id }}</td>
+        <td>{{ $product->code }}</td>
         <td>{{ $product->name }}</td>
         <td>{{ $product->description }}</td>
         <td>{{ $product->stock }}</td>
+        <td>{{ $product->stock_change }}</td>
+        <td>{{ $product->status ? 'Activo' : 'Inactivo' }}</td>
+        <td>{{ $product->status_change }}</td>
         <td>
             
             <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>

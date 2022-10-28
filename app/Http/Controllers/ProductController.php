@@ -49,7 +49,10 @@ class ProductController extends Controller
         ]);
         */
 
-        Product::create($request->all());
+        $input = $request->all();
+        //$input['code'] = str_pad($input['code'], 6, "0", STR_PAD_LEFT);
+
+        Product::create($input);
         
         return redirect()->route('products.index')
             ->with('success','Product created successfully.');
