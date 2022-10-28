@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         //dd(session()->flash('message', 'test1'),session('message') );
-        $products = Product::orderBy('id', 'desc')->paginate(10);
+        $products = Product::orderBy('id', 'desc')
+            ->with('category')->paginate(10);
         return view('products.index', compact('products'));
     }
 
@@ -28,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::get(['id', 'name']);
+        $categories_pluck = Category::pluck('name', 'id');
+        return view('products.create', compact('categories', 'categories_pluck'));
     }
 
     /**
@@ -89,7 +93,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all();
+        return view('products.edit', compact('product','categories'));
     }
 
     /**

@@ -27,6 +27,7 @@ class ProductUpdateRequest extends FormRequest
             'name'      => ['required', 'string', 'max:20', 'unique:products,id'],
             'stock'     => ['required', 'integer', 'min:10'],
             'code'      => ['required', 'string', 'max:6'],
+            'category_id'   => ['required', 'integer', 'exists:categories,id'],
         ];
     }
 

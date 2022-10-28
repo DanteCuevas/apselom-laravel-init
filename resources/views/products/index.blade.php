@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -28,6 +27,7 @@
         <th>Stock Accessor</th>
         <th>Status</th>
         <th>Status Accessor</th>
+        <th>Category</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($products as $product)
@@ -40,6 +40,7 @@
         <td>{{ $product->stock_change }}</td>
         <td>{{ $product->status ? 'Activo' : 'Inactivo' }}</td>
         <td>{{ $product->status_change }}</td>
+        <td>{{ $product->category_name }}</td>
         <td>
             
             <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>

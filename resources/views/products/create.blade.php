@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+@php
+    //dd($categories->toArray(), $categories_pluck->toArray());
+@endphp
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -46,6 +49,28 @@
             <div class="form-group">
                 <strong>Code:</strong>
                 <input type="text" name="code" class="form-control" placeholder="Code">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Categoria:</strong>
+                <select class="form-control" name="category_id">
+                    <option value="">Selecione una categoria</option>
+                    @foreach ($categories as $categorie)
+                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Categoria:</strong>
+                <select class="form-control" name="category_id">
+                    <option value="">Selecione una categoria</option>
+                    @foreach ($categories_pluck as $id => $categorie)
+                        <option value="{{ $id }}">{{ $categorie }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

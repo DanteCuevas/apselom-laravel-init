@@ -49,6 +49,17 @@
                 <input type="text" name="code" class="form-control" placeholder="Code"  value="{{ $product->code }}">
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Categoria:</strong>
+                <select class="form-control" name="category_id">
+                    <option value="">Selecione una categoria</option>
+                    @foreach ($categories as $categorie)
+                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
