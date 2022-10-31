@@ -15,11 +15,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //dd(session()->flash('message', 'test1'),session('message') );
+        /* $products = Product::orderBy('id', 'desc')->where('status', true);
+        if($request->code) {
+            //$products->where('code', $request->code);
+            $products->where('code', 'like', '%'.$request->code.'%');
+        }
+        if($request->stock) {
+            $products->where('stock', '>=', $request->stock);
+        }
+        if($request->category) {
+            $categoryIds = Category::where('name', 'like', '%'.$request->category.'%')->pluck('id');
+            //dd($categoryIds);
+            $products->whereIn('category_id', $categoryIds);
+        }
+        $products = $products->with('category')->paginate(10); */
+
         $products = Product::orderBy('id', 'desc')
+            ->filterCode($request->code)
+            ->filterGraterStock($request->stock)
+            ->filterCategory($request->category)
             ->with('category')->paginate(10);
+
         return view('products.index', compact('products'));
     }
 

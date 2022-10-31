@@ -2,6 +2,27 @@
 
 @section('content')
 <div class="row">
+    <form action="{{ route('products.index') }}" method="GET">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Filtro por Codigo</strong>
+                <input type="text" name="code" class="form-control" placeholder="Code">
+            </div>
+            <div class="form-group">
+                <strong>Mayor por stock</strong>
+                <input type="text" name="stock" class="form-control" placeholder="Stock">
+            </div>
+            <div class="form-group">
+                <strong>Category</strong>
+                <input type="text" name="category" class="form-control" placeholder="Stock">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Laravel 8 CRUD Example from scratch</h2>
