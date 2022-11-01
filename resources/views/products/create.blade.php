@@ -73,9 +73,44 @@
                 </select>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Categoria By Ajax:</strong>
+                <select class="form-control" name="category_json_id" id="category_json_id">
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </form>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+    $.get( "{{ route('categories.json') }}", function( response ) {
+        console.log( 'categories: ', response );
+        // Its good but not efficient
+        /* $.each(response.data, function(key, value) {   
+            console.log(value);
+            $('#category_json_id')
+                .append($("<option></option>")
+                            .attr("value", key)
+                            .text(value)); 
+        }); */
+
+        options = '';
+        $.each(response.data, function(key, value) {   
+            //options = options + '<option value="'+key+'">'+value+'</option>';
+            options += '<option value="'+key+'">'+value+'</option>';
+        });
+        //console.log(options);
+        $('#category_json_id').append(options);
+    });
+    console.log($('#category_json_id').val());
+});
+</script>
+
 @endsection

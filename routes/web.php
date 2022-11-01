@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/users', [UserController::class, 'store']);
 //Route::get('/products/{product}', [ProductController::class, 'store'])->name('products.show');
 //....  it is the same to down
 Route::resource('products', ProductController::class);
+
+
+Route::get('/categories/json', [CategoryController::class, 'indexJson'])->name('categories.json');
